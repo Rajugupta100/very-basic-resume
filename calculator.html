@@ -1,141 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<script src=
-"https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.js"
-		integrity=
-"sha512-BbVEDjbqdN3Eow8+empLMrJlxXRj5nEitiCAK5A1pUr66+jLVejo3PmjIaucRnjlB0P9R3rBUs3g5jXc8ti+fQ=="
-		crossorigin="anonymous"
-		referrerpolicy="no-referrer"></script>
-	<script src=
-"https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"
-		integrity=
-"sha512-iphNRh6dPbeuPGIrQbCdbBF/qcqadKWLa35YPVfMZMHBSI6PLJh1om2xCTWhpVpmUyb4IvVS9iYnnYMkleVXLA=="
-		crossorigin="anonymous"
-		referrerpolicy="no-referrer"></script>
-	<!-- for styling -->
-	<style>
-		table {
-			border: 1px solid black;
-			margin-left: auto;
-			margin-right: auto;
-		}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
 
-		input[type="button"] {
-			width: 100%;
-			padding: 20px 40px;
-			background-color: green;
-			color: white;
-			font-size: 24px;
-			font-weight: bold;
-			border: none;
-			border-radius: 5px;
-		}
+        body {
+            background-color: #26547b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-		input[type="text"] {
-			padding: 20px 30px;
-			font-size: 24px;
-			font-weight: bold;
-			border: none;
-			border-radius: 5px;
-			border: 2px solid black;
-		}
-	</style>
+        .main {
+            /* border: 2px solid red; */
+            width: 70%;
+            height: 400px;
+        }
+
+        .parent {
+            width: 100%;
+            height: 100%;
+            background-color: #ef4869;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .top {
+            width: 100%;
+            /* border: 2px solid blue; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topLeft {
+            /* border: 2px solid green; */
+            padding: .8rem 1.5rem;
+            background-color: #fed268;
+            box-shadow: 0 5px 3px #d68c18;
+            border-radius: 5px;
+        }
+
+        .topRight {
+            /* border: 2px solid green; */
+            padding: .8rem 1.5rem;
+            width: 80%;
+            border-radius: 5px;
+            background-color: #26547b;
+            color: white;
+            font-weight: 900;
+            text-align: end;
+            box-shadow: inset 2px 2px 2px 1px #490311;
+        }
+
+        .bottom{
+            /* border: 2px solid green; */
+            width: 100%;
+            display: flex;
+            height: 83%;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .numbers, .operators, .equal{
+            /* padding: 1.5rem 1.5rem; */
+            /* border: 2px solid green; */
+            width: 22%;
+            padding: 1.2rem 0;
+            /* margin: .8rem; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            color: white;
+            font-weight: 900;
+        }
+        
+        .numbers{
+            background-color: #26547b;
+    
+            box-shadow: 0px 3px 2px #112d45;
+        }
+
+        .operators{
+            background-color: #fed268;
+            box-shadow: 0 5px 3px #d68c18;
+            color: rgb(68, 68, 68);
+        }
+
+        .equal{
+            background-color: #06d5a0;
+            box-shadow: 0 2px 2px #008d64;
+        }
+
+        @media only screen and (min-width: 768px) {
+            .main{
+                width: 40%;
+            }
+        }
+
+    </style>
 </head>
-<!-- create table -->
 
 <body>
-	<table id="calcu">
-		<tr>
-			<td colspan="3"><input type="text" id="result"></td>
-			<!-- clr() function will call clr to clear all value -->
-			<td><input type="button" value="c" onclick="clr()" /> </td>
-		</tr>
-		<tr>
-			<!-- create button and assign value to each button -->
-			<!-- dis("1") will call function dis to display value -->
-			<td><input type="button" value="1" onclick="dis('1')"
-						onkeydown="myFunction(event)"> </td>
-			<td><input type="button" value="2" onclick="dis('2')"
-						onkeydown="myFunction(event)"> </td>
-			<td><input type="button" value="3" onclick="dis('3')"
-						onkeydown="myFunction(event)"> </td>
-			<td><input type="button" value="/" onclick="dis('/')"
-						onkeydown="myFunction(event)"> </td>
-		</tr>
-		<tr>
-			<td><input type="button" value="4" onclick="dis('4')"
-						onkeydown="myFunction(event)"> </td>
-			<td><input type="button" value="5" onclick="dis('5')"
-						onkeydown="myFunction(event)"> </td>
-			<td><input type="button" value="6" onclick="dis('6')"
-						onkeydown="myFunction(event)"> </td>
-			<td><input type="button" value="*" onclick="dis('*')"
-						onkeydown="myFunction(event)"> </td>
-		</tr>
-		<tr>
-			<td><input type="button" value="7" onclick="dis('7')"
-						onkeydown="myFunction(event)"> </td>
-			<td><input type="button" value="8" onclick="dis('8')"
-						onkeydown="myFunction(event)"> </td>
-			<td><input type="button" value="9" onclick="dis('9')"
-						onkeydown="myFunction(event)"> </td>
-			<td><input type="button" value="-" onclick="dis('-')"
-						onkeydown="myFunction(event)"> </td>
-		</tr>
-		<tr>
-			<td><input type="button" value="0" onclick="dis('0')"
-						onkeydown="myFunction(event)"> </td>
-			<td><input type="button" value="." onclick="dis('.')"
-						onkeydown="myFunction(event)"> </td>
-			<!-- solve function call function solve to evaluate value -->
-			<td><input type="button" value="=" onclick="solve()"> </td>
-
-			<td><input type="button" value="+" onclick="dis('+')"
-						onkeydown="myFunction(event)"> </td>
-		</tr>
-	</table>
-
-	<script>
-		// Function that display value
-		function dis(val) {
-			document.getElementById("result").value += val
-		}
-
-		function myFunction(event) {
-			if (event.key == '0' || event.key == '1'
-				|| event.key == '2' || event.key == '3'
-				|| event.key == '4' || event.key == '5'
-				|| event.key == '6' || event.key == '7'
-				|| event.key == '8' || event.key == '9'
-				|| event.key == '+' || event.key == '-'
-				|| event.key == '*' || event.key == '/')
-				document.getElementById("result").value += event.key;
-		}
-
-		var cal = document.getElementById("calcu");
-		cal.onkeyup = function (event) {
-			if (event.keyCode === 13) {
-				console.log("Enter");
-				let x = document.getElementById("result").value
-				console.log(x);
-				solve();
-			}
-		}
-
-		// Function that evaluates the digit and return result
-		function solve() {
-			let x = document.getElementById("result").value
-			let y = math.evaluate(x)
-			document.getElementById("result").value = y
-		}
-
-		// Function that clear the display
-		function clr() {
-			document.getElementById("result").value = ""
-		}
-	</script>
+    <div class="main">
+        <div class="parent">
+            <div class="top">
+                <div class="topLeft">C</div>
+                <div class="topRight">0</div>
+            </div>
+            <div class="bottom">
+                <div class="seven numbers">7</div>
+                <div class="eight numbers">8</div>
+                <div class="nine numbers">9</div>
+                <div class="multiply operators">X</div>
+                <div class="four numbers">4</div>
+                <div class="five numbers">5</div>
+                <div class="six numbers">6</div>
+                <div class="divide operators">/</div>
+                <div class="one numbers">1</div>
+                <div class="two numbers">2</div>
+                <div class="three numbers">3</div>
+                <div class="plus operators">+</div>
+                <div class="dot numbers">.</div>
+                <div class="zero numbers">0</div>
+                <div class="equal">=</div>
+                <div class="minus operators">-</div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
